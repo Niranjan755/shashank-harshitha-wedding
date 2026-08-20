@@ -127,6 +127,46 @@ if (rsvpForm) {
   });
 }
 
+// ---- Add to Calendar (.ics download) ----
+const addToCalendarBtn = document.getElementById('addToCalendar');
+
+function toICSDate(date) {
+  return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+}
+
+if (addToCalendarBtn) {
+  addToCalendarBtn.addEventListener('click', () => {
+    const start = WEDDING_DATE;
+    const end = new Date(start.getTime() + 3 * 60 * 60 * 1000); // 3-hour block
+
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Shashank & Harshitha Wedding//EN',
+      'BEGIN:VEVENT',
+      `UID:${Date.now()}@shashank-harshitha-wedding`,
+      `DTSTAMP:${toICSDate(new Date())}`,
+      `DTSTART:${toICSDate(start)}`,
+      `DTEND:${toICSDate(end)}`,
+      'SUMMARY:Shashank & Harshitha\'s Wedding',
+      'DESCRIPTION:Wedding ceremony of Shashank and Harshitha',
+      'LOCATION:Guntur, Andhra Pradesh, India',
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'shashank-harshitha-wedding.ics';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  });
+}
+
 // ---- Header shadow on scroll ----
 const header = document.getElementById('siteHeader');
 if (header) {

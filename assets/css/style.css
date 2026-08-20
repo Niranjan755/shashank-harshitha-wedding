@@ -1,17 +1,17 @@
 /* ==========================================================================
    Shashank & Harshitha — Wedding Invitation
-   Traditional Indian floral theme
+   Minimalist, modern theme
    ========================================================================== */
 
 :root {
-  --maroon: #7a1230;
-  --maroon-dark: #55091f;
-  --gold: #c9a227;
-  --gold-light: #e8cd6e;
-  --ivory: #fdf6ea;
-  --cream: #f7ecd9;
-  --text-dark: #3a1f10;
-  --text-muted: #6b5847;
+  --maroon: #8a5a44;
+  --maroon-dark: #6e4735;
+  --gold: #ad9a80;
+  --gold-light: #d9cdb8;
+  --ivory: #faf7f2;
+  --cream: #f1ebe1;
+  --text-dark: #2b2620;
+  --text-muted: #746a5d;
 
   --font-script: 'Great Vibes', cursive;
   --font-serif: 'Cormorant Garamond', serif;
@@ -104,15 +104,15 @@ img, iframe { max-width: 100%; }
 section { padding: 90px 0; }
 
 .placeholder-box {
-  background: repeating-linear-gradient(45deg, var(--cream), var(--cream) 10px, #f0e0bd 10px, #f0e0bd 20px);
-  border: 2px dashed var(--gold);
+  background: var(--cream);
+  border: 1px dashed var(--gold);
   color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 0.9rem;
-  border-radius: 12px;
+  border-radius: 4px;
 }
 .placeholder-box small { opacity: 0.7; }
 
@@ -191,33 +191,9 @@ section { padding: 90px 0; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(201,162,39,0.10), transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(122,18,48,0.08), transparent 40%),
-    var(--ivory);
+  background: var(--ivory);
   overflow: hidden;
 }
-.hero-pattern {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle, rgba(201,162,39,0.15) 1.5px, transparent 1.5px);
-  background-size: 28px 28px;
-  opacity: 0.5;
-  pointer-events: none;
-}
-.corner {
-  position: absolute;
-  width: 110px;
-  height: 110px;
-  color: var(--gold);
-  opacity: 0.85;
-}
-.corner svg { width: 100%; height: 100%; }
-.corner-tl { top: 16px; left: 16px; }
-.corner-tr { top: 16px; right: 16px; transform: scaleX(-1); }
-.corner-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
-.corner-br { bottom: 16px; right: 16px; transform: scale(-1, -1); }
 
 .hero-content { position: relative; z-index: 2; padding: 24px; max-width: 700px; }
 .eyebrow {
@@ -264,6 +240,14 @@ section { padding: 90px 0; }
   margin-bottom: 30px;
 }
 
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.hero-actions .btn-outline { margin-top: 0; }
+
 .countdown {
   display: flex;
   justify-content: center;
@@ -272,12 +256,12 @@ section { padding: 90px 0; }
   flex-wrap: wrap;
 }
 .cd-box {
-  background: var(--maroon);
-  color: var(--ivory);
+  background: transparent;
+  color: var(--maroon);
   min-width: 72px;
-  padding: 14px 10px;
-  border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(122,18,48,0.25);
+  padding: 12px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(138,90,68,0.3);
 }
 .cd-num {
   display: block;
@@ -350,7 +334,7 @@ section { padding: 90px 0; }
   background: var(--cream);
   padding: 30px 20px;
   border-radius: 14px;
-  border: 1px solid rgba(201,162,39,0.3);
+  border: 1px solid rgba(173,154,128,0.35);
 }
 .timeline-icon { font-size: 2rem; margin-bottom: 10px; }
 .timeline-item h3 {
@@ -373,12 +357,12 @@ section { padding: 90px 0; }
   border-radius: 16px;
   padding: 32px 24px;
   text-align: center;
-  border: 1px solid rgba(201,162,39,0.3);
+  border: 1px solid rgba(173,154,128,0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .event-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(122,18,48,0.12);
+  box-shadow: 0 14px 28px rgba(138,90,68,0.12);
 }
 .event-card.featured {
   background: var(--maroon);
@@ -388,7 +372,7 @@ section { padding: 90px 0; }
 .event-card.featured h3 { color: var(--gold-light); }
 .event-card.featured .event-venue,
 .event-card.featured .event-desc,
-.event-card.featured .event-datetime { color: rgba(253,246,234,0.85); }
+.event-card.featured .event-datetime { color: rgba(250,247,242,0.85); }
 
 .event-icon { font-size: 2.2rem; margin-bottom: 12px; }
 .event-card h3 {
@@ -412,14 +396,14 @@ section { padding: 90px 0; }
   border-radius: 16px;
   overflow: hidden;
   min-height: 340px;
-  border: 1px solid rgba(201,162,39,0.3);
+  border: 1px solid rgba(173,154,128,0.35);
 }
 .venue-map iframe { width: 100%; height: 100%; min-height: 340px; border: 0; }
 .venue-info {
   background: var(--cream);
   border-radius: 16px;
   padding: 34px;
-  border: 1px solid rgba(201,162,39,0.3);
+  border: 1px solid rgba(173,154,128,0.35);
 }
 .venue-info h3 {
   font-family: var(--font-serif);
@@ -452,7 +436,7 @@ section { padding: 90px 0; }
   background: var(--ivory);
   padding: 40px;
   border-radius: 18px;
-  border: 1px solid rgba(201,162,39,0.35);
+  border: 1px solid rgba(173,154,128,0.4);
 }
 .form-row { margin-bottom: 20px; display: flex; flex-direction: column; gap: 6px; }
 .form-row-split { flex-direction: row; gap: 20px; }
@@ -469,7 +453,7 @@ section { padding: 90px 0; }
   font-family: var(--font-body);
   padding: 12px 14px;
   border-radius: 8px;
-  border: 1px solid rgba(122,18,48,0.25);
+  border: 1px solid rgba(138,90,68,0.2);
   background: #fff;
   color: var(--text-dark);
   font-size: 0.95rem;
@@ -479,7 +463,7 @@ section { padding: 90px 0; }
 .rsvp-form textarea:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(201,162,39,0.2);
+  box-shadow: 0 0 0 3px rgba(173,154,128,0.25);
 }
 .rsvp-form button { width: 100%; margin-top: 8px; }
 .rsvp-form button:disabled { opacity: 0.7; cursor: not-allowed; }
@@ -528,7 +512,7 @@ section { padding: 90px 0; }
     align-items: flex-start;
     padding: 20px 24px;
     gap: 18px;
-    border-bottom: 1px solid rgba(201,162,39,0.25);
+    border-bottom: 1px solid rgba(173,154,128,0.3);
     transform: translateY(-150%);
     opacity: 0;
     transition: all 0.3s ease;

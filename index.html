@@ -35,20 +35,6 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
-  <div class="hero-pattern"></div>
-  <div class="corner corner-tl" aria-hidden="true">
-    <svg viewBox="0 0 200 200"><use href="#floral-corner"/></svg>
-  </div>
-  <div class="corner corner-tr" aria-hidden="true">
-    <svg viewBox="0 0 200 200"><use href="#floral-corner"/></svg>
-  </div>
-  <div class="corner corner-bl" aria-hidden="true">
-    <svg viewBox="0 0 200 200"><use href="#floral-corner"/></svg>
-  </div>
-  <div class="corner corner-br" aria-hidden="true">
-    <svg viewBox="0 0 200 200"><use href="#floral-corner"/></svg>
-  </div>
-
   <div class="hero-content">
     <p class="eyebrow">Together with our families</p>
     <h1 class="hero-names">
@@ -72,7 +58,10 @@
       <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seconds</span></div>
     </div>
 
-    <a href="#rsvp" class="btn btn-primary">RSVP Now</a>
+    <div class="hero-actions">
+      <a href="#rsvp" class="btn btn-primary">RSVP</a>
+      <button type="button" class="btn btn-outline" id="addToCalendar">Add to Calendar</button>
+    </div>
   </div>
 
   <a href="#story" class="scroll-cue" aria-label="Scroll down">
@@ -286,20 +275,10 @@
 <!-- ===== SVG SYMBOL DEFS (reused floral assets) ===== -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <g id="floral-corner">
-      <path d="M2,2 C 60,2 60,60 2,60" fill="none" stroke="currentColor" stroke-width="2"/>
-      <circle cx="30" cy="30" r="4" fill="currentColor"/>
-      <path d="M2,2 C40,10 10,40 2,80" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
-      <path d="M2,2 C10,40 40,10 80,2" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
-      <circle cx="6" cy="6" r="3" fill="currentColor" opacity="0.8"/>
-      <path d="M20,20 Q30,5 40,20 Q30,35 20,20 Z" fill="currentColor" opacity="0.35"/>
-    </g>
     <g id="divider-flourish">
-      <line x1="0" y1="12" x2="120" y2="12" stroke="currentColor" stroke-width="1"/>
-      <line x1="180" y1="12" x2="300" y2="12" stroke="currentColor" stroke-width="1"/>
-      <path d="M140,12 Q150,0 160,12 Q150,24 140,12 Z" fill="currentColor"/>
-      <circle cx="130" cy="12" r="2.5" fill="currentColor"/>
-      <circle cx="170" cy="12" r="2.5" fill="currentColor"/>
+      <line x1="0" y1="12" x2="135" y2="12" stroke="currentColor" stroke-width="1"/>
+      <line x1="165" y1="12" x2="300" y2="12" stroke="currentColor" stroke-width="1"/>
+      <rect x="146" y="8" width="8" height="8" fill="currentColor" transform="rotate(45 150 12)"/>
     </g>
   </defs>
 </svg>
