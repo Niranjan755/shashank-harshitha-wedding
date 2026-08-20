@@ -86,7 +86,7 @@ if (rsvpForm) {
       guestEmail: document.getElementById('guestEmail').value.trim(),
       attending: document.getElementById('attending').value,
       guestCount: document.getElementById('guestCount').value,
-      events: document.getElementById('events').value.trim(),
+      events: document.getElementById('eventsAttending').value.trim(),
       message: document.getElementById('message').value.trim(),
     };
 
