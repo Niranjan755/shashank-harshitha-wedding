@@ -55,6 +55,10 @@ function updateCountdown() {
   hoursEl.textContent = String(hours).padStart(2, '0');
   minsEl.textContent = String(mins).padStart(2, '0');
   secsEl.textContent = String(secs).padStart(2, '0');
+
+  secsEl.classList.remove('tick');
+  void secsEl.offsetWidth; // restart the animation each second
+  secsEl.classList.add('tick');
 }
 
 updateCountdown();
@@ -167,12 +171,33 @@ if (addToCalendarBtn) {
   });
 }
 
+// ---- Scroll-reveal animations ----
+const revealEls = document.querySelectorAll('.reveal');
+
+if (revealEls.length && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('is-visible'));
+}
+
 // ---- Header shadow on scroll ----
 const header = document.getElementById('siteHeader');
 if (header) {
   window.addEventListener('scroll', () => {
     if (window.scrollY > 10) {
-      header.style.boxShadow = '0 4px 16px rgba(122,18,48,0.08)';
+      header.style.boxShadow = '0 4px 16px rgba(138,90,68,0.08)';
     } else {
       header.style.boxShadow = 'none';
     }
