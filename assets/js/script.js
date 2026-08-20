@@ -8,6 +8,29 @@ const RSVP_EMAIL = 'reddyguda1999@gmail.com';
 // Formspree endpoint — replace YOUR_FORM_ID with the ID from https://formspree.io
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenbejj';
 
+// ---- Invite cover: envelope opening animation ----
+const inviteCover = document.getElementById('inviteCover');
+const inviteOpenBtn = document.getElementById('inviteOpenBtn');
+const envelope = document.getElementById('envelope');
+
+if (inviteCover && inviteOpenBtn && envelope) {
+  document.body.classList.add('no-scroll');
+
+  inviteOpenBtn.addEventListener('click', () => {
+    envelope.classList.add('open');
+    inviteOpenBtn.disabled = true;
+
+    setTimeout(() => {
+      inviteCover.classList.add('fade-out');
+    }, 1000);
+
+    setTimeout(() => {
+      inviteCover.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }, 1700);
+  });
+}
+
 // ---- Mobile nav toggle ----
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');

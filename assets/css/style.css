@@ -61,7 +61,7 @@ img, iframe { max-width: 100%; }
 .btn-primary:hover {
   background: var(--maroon-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(122, 18, 48, 0.3);
+  box-shadow: 0 8px 20px rgba(138,90,68,0.3);
 }
 .btn-outline {
   background: transparent;
@@ -73,6 +73,152 @@ img, iframe { max-width: 100%; }
   background: var(--maroon);
   color: var(--ivory);
   transform: translateY(-2px);
+}
+
+/* ---------- Invite cover (envelope opening animation) ---------- */
+body.no-scroll { overflow: hidden; height: 100%; }
+
+.invite-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: var(--ivory);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.invite-cover.fade-out {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.envelope {
+  position: relative;
+  width: clamp(220px, 60vw, 320px);
+  aspect-ratio: 3 / 2;
+  perspective: 1200px;
+}
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--cream);
+  border: 1px solid rgba(173,154,128,0.4);
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(138,90,68,0.15);
+}
+.invite-card {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 10%;
+  height: 82%;
+  z-index: 2;
+  background: var(--ivory);
+  border: 1px solid rgba(173,154,128,0.35);
+  border-radius: 4px;
+  box-shadow: 0 10px 22px rgba(138,90,68,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+  transform: translateY(4%);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.invite-card-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.65rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.invite-card-names {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  color: var(--maroon);
+  line-height: 1.25;
+}
+.invite-card-sub {
+  margin-top: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  z-index: 3;
+  background: var(--cream);
+  border-bottom: 1px solid rgba(173,154,128,0.4);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.6, -0.05, 0.34, 1);
+}
+.envelope-seal {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 4;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--maroon);
+  color: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 10px rgba(138,90,68,0.3);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.envelope.open .envelope-flap { transform: rotateX(180deg); }
+.envelope.open .envelope-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+.envelope.open .invite-card { transform: translateY(-76%); }
+
+.invite-open-btn {
+  background: transparent;
+  border: 1px solid var(--maroon);
+  color: var(--maroon);
+  padding: 12px 32px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  animation: invitePulse 2.2s ease-in-out infinite;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.invite-open-btn:hover {
+  background: var(--maroon);
+  color: var(--ivory);
+}
+.invite-open-btn:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes invitePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* ---------- Section shared ---------- */
@@ -133,6 +279,10 @@ section { padding: 90px 0; }
     transform: none !important;
     animation: none !important;
     transition: none !important;
+  }
+  .invite-cover, .envelope-flap, .invite-card, .envelope-seal, .invite-open-btn {
+    transition: none !important;
+    animation: none !important;
   }
 }
 
