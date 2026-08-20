@@ -482,6 +482,15 @@ section { padding: 90px 0; }
   box-shadow: 0 0 0 3px rgba(201,162,39,0.2);
 }
 .rsvp-form button { width: 100%; margin-top: 8px; }
+.rsvp-form button:disabled { opacity: 0.7; cursor: not-allowed; }
+.rsvp-status {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.rsvp-status-success { color: #2e7d32; }
+.rsvp-status-error { color: var(--maroon); }
+.rsvp-status-error a { text-decoration: underline; font-weight: 600; }
 
 /* ---------- Footer ---------- */
 .site-footer {

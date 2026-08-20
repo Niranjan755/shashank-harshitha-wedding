@@ -5,6 +5,8 @@
 // ---- Config: update these when real details are confirmed ----
 const WEDDING_DATE = new Date('2026-12-12T08:00:00+05:30'); // Muhurtham time, IST
 const RSVP_EMAIL = 'reddyguda1999@gmail.com';
+// Formspree endpoint — replace YOUR_FORM_ID with the ID from https://formspree.io
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdenbejj';
 
 // ---- Mobile nav toggle ----
 const navToggle = document.getElementById('navToggle');
@@ -58,31 +60,70 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ---- RSVP form: build a mailto: link with the response ----
+// ---- RSVP form: submit to Formspree, with a mailto: fallback ----
 const rsvpForm = document.getElementById('rsvpForm');
+const rsvpStatus = document.getElementById('rsvpStatus');
+const rsvpSubmit = document.getElementById('rsvpSubmit');
+
+function buildMailtoUrl(data) {
+  const subject = `RSVP: ${data.guestName} — ${data.attending}`;
+  const body =
+    `Name: ${data.guestName}\n` +
+    `Email: ${data.guestEmail}\n` +
+    `Attending: ${data.attending}\n` +
+    `Number of Guests: ${data.guestCount}\n` +
+    `Events Attending: ${data.events || '-'}\n` +
+    `Message: ${data.message || '-'}`;
+  return `mailto:${RSVP_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 if (rsvpForm) {
-  rsvpForm.addEventListener('submit', (e) => {
+  rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('guestName').value.trim();
-    const email = document.getElementById('guestEmail').value.trim();
-    const attending = document.getElementById('attending').value;
-    const guestCount = document.getElementById('guestCount').value;
-    const events = document.getElementById('events').value.trim();
-    const message = document.getElementById('message').value.trim();
+    const data = {
+      guestName: document.getElementById('guestName').value.trim(),
+      guestEmail: document.getElementById('guestEmail').value.trim(),
+      attending: document.getElementById('attending').value,
+      guestCount: document.getElementById('guestCount').value,
+      events: document.getElementById('events').value.trim(),
+      message: document.getElementById('message').value.trim(),
+    };
 
-    const subject = `RSVP: ${name} — ${attending}`;
-    const body =
-      `Name: ${name}\n` +
-      `Email: ${email}\n` +
-      `Attending: ${attending}\n` +
-      `Number of Guests: ${guestCount}\n` +
-      `Events Attending: ${events || '-'}\n` +
-      `Message: ${message || '-'}`;
+    if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
+      rsvpStatus.textContent = 'RSVP form is not fully set up yet — opening your email app instead.';
+      rsvpStatus.className = 'rsvp-status rsvp-status-error';
+      window.location.href = buildMailtoUrl(data);
+      return;
+    }
 
-    const mailtoUrl = `mailto:${RSVP_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoUrl;
+    rsvpSubmit.disabled = true;
+    rsvpSubmit.textContent = 'Sending...';
+    rsvpStatus.textContent = '';
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(rsvpForm),
+      });
+
+      if (response.ok) {
+        rsvpStatus.textContent = 'Thank you! Your RSVP has been sent. 💛';
+        rsvpStatus.className = 'rsvp-status rsvp-status-success';
+        rsvpForm.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      rsvpStatus.innerHTML =
+        'Something went wrong sending your RSVP. Please ' +
+        `<a href="${buildMailtoUrl(data)}">click here to email us directly</a>.`;
+      rsvpStatus.className = 'rsvp-status rsvp-status-error';
+    } finally {
+      rsvpSubmit.disabled = false;
+      rsvpSubmit.textContent = 'Send RSVP';
+    }
   });
 }
 

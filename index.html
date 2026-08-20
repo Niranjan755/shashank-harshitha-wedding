@@ -236,9 +236,9 @@
     <p class="section-eyebrow">Join Us</p>
     <h2 class="section-title">RSVP</h2>
     <svg viewBox="0 0 300 24" class="divider-svg divider-center"><use href="#divider-flourish"/></svg>
-    <p class="rsvp-note">Kindly respond by 15th November 2026. Submitting will open your email app to send us your response.</p>
+    <p class="rsvp-note">Kindly respond by 15th November 2026.</p>
 
-    <form class="rsvp-form" id="rsvpForm">
+    <form class="rsvp-form" id="rsvpForm" action="https://formspree.io/f/mdenbejj" method="POST">
       <div class="form-row">
         <label for="guestName">Full Name</label>
         <input type="text" id="guestName" name="guestName" required placeholder="Your name">
@@ -268,7 +268,8 @@
         <label for="message">Message for the Couple</label>
         <textarea id="message" name="message" rows="4" placeholder="Your wishes..."></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Send RSVP</button>
+      <button type="submit" class="btn btn-primary" id="rsvpSubmit">Send RSVP</button>
+      <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
